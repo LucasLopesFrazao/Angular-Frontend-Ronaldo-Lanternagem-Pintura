@@ -1,0 +1,95 @@
+<app-navbar></app-navbar>
+<mat-card>
+  <mat-card-content>
+    <mat-toolbar color="primary"> termoQuitacaos </mat-toolbar>
+    <div *ngIf="termosQuitacoes$ | async as cliente; else loading">
+      <mat-table [dataSource]="termosQuitacoes$" class="mat-elevation-z8 column-flex">
+        <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="proprietario">
+          <mat-header-cell *matHeaderCellDef>Proprietário</mat-header-cell>
+          <mat-cell *matCellDef="let termoQuitacao">{{ termoQuitacao.carro.cliente.nome }}</mat-cell>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="veiculo">
+          <mat-header-cell *matHeaderCellDef>Carro</mat-header-cell>
+          <mat-cell *matCellDef="let termoQuitacao">{{ termoQuitacao.carro.modelo }}</mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="placa">
+          <mat-header-cell *matHeaderCellDef>Placa</mat-header-cell>
+          <mat-cell *matCellDef="let termoQuitacao">{{ termoQuitacao.carro.placa }}</mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="data">
+          <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
+          <mat-cell *matCellDef="let termoQuitacao">{{ termoQuitacao.data}}</mat-cell>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="seguradora">
+          <mat-header-cell *matHeaderCellDef>Seguradora</mat-header-cell>
+          <mat-cell *matCellDef="let termoQuitacao">{{ termoQuitacao.seguradora }}</mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="valorMaoObra">
+          <mat-header-cell *matHeaderCellDef>Mão de obra (R$)</mat-header-cell>
+          <mat-cell *matCellDef="let termoQuitacao">R${{ termoQuitacao.MaoObra | mask: 'separator':'.' }}</mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="valorTotal">
+          <mat-header-cell *matHeaderCellDef>Total (R$)</mat-header-cell>
+          <mat-cell *matCellDef="let termoQuitacao">R${{ termoQuitacao.valorTotal | mask: 'separator':'.'}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="acoes">
+          <mat-header-cell *matHeaderCellDef class="action-column">
+            Ações
+          </mat-header-cell>
+          <mat-cell *matCellDef="let termoQuitacao" class="action-column">
+            <button
+              mat-mini-fab
+              color="primary"
+              aria-label="Editar um termoQuitacao"
+              (click)="onEdit(termoQuitacao)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-mini-fab
+              color="primary"
+              aria-label="Adicionar um termo de quitação"
+              (click)="onGeneratePDF(termoQuitacao)"
+            >
+              <mat-icon>picture_as_pdf</mat-icon>
+            </button>
+            <button
+              mat-mini-fab
+              color="accent"
+              aria-label="remover um termoQuitacao"
+              (click)="onDelete(termoQuitacao)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </div>
+
+    <ng-template #loading>
+      <div class="loading-spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

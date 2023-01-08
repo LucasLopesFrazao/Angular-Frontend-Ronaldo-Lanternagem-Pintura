@@ -1,0 +1,80 @@
+#container {
+  width: 1000px;
+  display: flex;
+  margin-bottom: 3em;
+  align-items: flex-start;
+}
+
+#container2 {
+  width: 1000px;
+  display: flex;
+  margin-bottom: 3em;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+#containerColumn {
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3em;
+  align-items: center;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 18px;
+
+}
+
+#identificador{
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#nome{
+  text-transform: uppercase;
+  text-align: center;
+}
+
+#titulo{
+  background-color: #087829;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 0.5em
+}
+
+#conteudoCard{
+  padding: 0.5em;
+  margin-bottom: 1em;
+  line-height: 23px;
+}
+
+.imagem_logo{
+  width: 20em;
+}
+
+#info_cliente{
+  width: 100%;
+}
+
+#identificador2{
+  border: 2px solid #087829;
+  display: flex;
+  flex-direction: column;
+  margin: 0em 3em;
+  width: 35em;
+}
+#identificador3{
+  border: 2px solid #087829;
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+}
+
+.center {
+  text-align: justify;
+  font-size: 24px;
+  line-height: 30px;
+}

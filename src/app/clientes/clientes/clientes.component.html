@@ -1,0 +1,78 @@
+<app-navbar></app-navbar>
+<mat-card>
+  <mat-card-content>
+    <mat-toolbar color="primary"> Clientes </mat-toolbar>
+    <div *ngIf="clientes$ | async as cliente; else loading">
+      <mat-table [dataSource]="cliente" class="mat-elevation-z8 column-flex">
+        <!-- Nome Column -->
+        <ng-container matColumnDef="nome">
+          <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+          <mat-cell *matCellDef="let cliente">
+            {{ cliente.nome }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- CPF Column -->
+        <ng-container matColumnDef="cpf">
+          <mat-header-cell *matHeaderCellDef>CPF</mat-header-cell>
+          <mat-cell *matCellDef="let cliente">{{ cliente.cpf }}</mat-cell>
+        </ng-container>
+
+        <!-- RG Column -->
+        <ng-container matColumnDef="rg">
+          <mat-header-cell *matHeaderCellDef>RG</mat-header-cell>
+          <mat-cell *matCellDef="let cliente">{{ cliente.rg }}</mat-cell>
+        </ng-container>
+
+        <!-- Ações Column -->
+        <ng-container matColumnDef="acoes">
+          <mat-header-cell *matHeaderCellDef class="action-column">
+            <button
+              mat-mini-fab
+              color="primary"
+              aria-label="Adicionar um cliente"
+              (click)="onAdd()"
+            >
+              <mat-icon>add</mat-icon>
+            </button>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let cliente" class="action-column">
+            <button
+              mat-mini-fab
+              color="primary"
+              aria-label="Editar um cliente"
+              (click)="onEdit(cliente)"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-mini-fab
+              color="primary"
+              aria-label="Adicionar um carro"
+              (click)="onCreateCar(cliente)"
+            >
+              <mat-icon>directions_car</mat-icon>
+            </button>
+            <button
+              mat-mini-fab
+              color="accent"
+              aria-label="remover um cliente"
+              (click)="onDelete(cliente)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </div>
+
+    <ng-template #loading>
+      <div class="loading-spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

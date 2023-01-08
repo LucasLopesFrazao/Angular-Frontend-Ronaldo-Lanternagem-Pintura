@@ -1,0 +1,118 @@
+<app-navbar></app-navbar>
+<mat-card>
+  <mat-card-content>
+    <mat-toolbar color="primary"> Cadastrar termo de quitação </mat-toolbar>
+
+    <mat-checkbox class="example-margin" [(ngModel)]="sinistro">Sinistro</mat-checkbox>
+    <mat-checkbox class="example-margin" [(ngModel)]="orcamento">Orçamento</mat-checkbox>
+    <mat-checkbox class="example-margin" [(ngModel)]="apolice">Apólice</mat-checkbox>
+    <mat-checkbox class="example-margin" [(ngModel)]="franquia">Franquia</mat-checkbox>
+    <mat-checkbox class="example-margin" [(ngModel)]="pecas">Peças</mat-checkbox>
+    <mat-checkbox class="example-margin" [(ngModel)]="obs">Observações</mat-checkbox>
+
+
+
+
+    <form [formGroup]="form" class="min-width">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Seguradora / Cliente</mat-label>
+        <input matInput formControlName="seguradora" #seguradora />
+        <mat-hint align="end">{{ seguradora.value.length || 0 }}/255</mat-hint>
+        <mat-error *ngIf="form.get('seguradora')?.invalid">{{
+          getErrorMessage("seguradora")
+        }}</mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="fill" class="full-width" *ngIf="sinistro">
+        <mat-label>Sinistro</mat-label>
+        <input matInput formControlName="sinistro" #sinistro />
+        <mat-hint align="end">{{ sinistro.value.length || 0 }}/50</mat-hint>
+        <mat-error *ngIf="form.get('sinistro')?.invalid">{{
+          getErrorMessage("sinistro")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width" *ngIf="orcamento">
+        <mat-label>Orçamento</mat-label>
+        <input matInput formControlName="orcamento" #orcamento />
+        <mat-hint align="end">{{ orcamento.value.length || 0 }}/50</mat-hint>
+        <mat-error *ngIf="form.get('orcamento')?.invalid">{{
+          getErrorMessage("orcamento")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width" *ngIf="apolice">
+        <mat-label>Apólice</mat-label>
+        <input matInput formControlName="apolice" #apolice />
+        <mat-hint align="end">{{ apolice.value.length || 0 }}/50</mat-hint>
+        <mat-error *ngIf="form.get('apolice')?.invalid">{{
+          getErrorMessage("apolice")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Data do orçamento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="data" name="data" #data>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Valor total</mat-label>
+        <input matInput formControlName="valorTotal" #valorTotal mask="separator" thousandSeparator="."/>
+        <mat-error *ngIf="form.get('valorTotal')?.invalid">{{
+          getErrorMessage("valorTotal")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Mão obra</mat-label>
+        <input matInput formControlName="MaoObra" #MaoObra mask="separator" thousandSeparator="."/>
+        <mat-error *ngIf="form.get('MaoObra')?.invalid">{{
+          getErrorMessage("MaoObra")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width" *ngIf="pecas">
+        <mat-label>Peças</mat-label>
+        <input matInput formControlName="Peca" #Peca mask="separator" thousandSeparator="."/>
+        <mat-error *ngIf="form.get('Peca')?.invalid">{{
+          getErrorMessage("Peca")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width" *ngIf="franquia">
+        <mat-label>Franquia</mat-label>
+        <input matInput formControlName="Franquia" #Franquia mask="separator" thousandSeparator="."/>
+        <mat-error *ngIf="form.get('Franquia')?.invalid">{{
+          getErrorMessage("Franquia")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width" *ngIf="obs">
+        <mat-label>Observações</mat-label>
+        <textarea matInput formControlName="obs" #obs></textarea>
+        <mat-hint align="end">{{ obs.value.length || 0 }}/1000</mat-hint>
+        <mat-error *ngIf="form.get('obs')?.invalid">{{
+          getErrorMessage("obs")
+        }}</mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="form.invalid"
+      (click)="onSubmit()"
+    >
+      Salvar
+    </button>
+    <button mat-raised-button color="accent" (click)="onCancel()">
+      Cancelar
+    </button>
+
+    <div *ngIf="form.invalid" style="color: red">Preencha todos os campos</div>
+  </mat-card-actions>
+</mat-card>

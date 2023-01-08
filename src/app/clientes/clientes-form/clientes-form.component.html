@@ -1,0 +1,40 @@
+<app-navbar></app-navbar>
+<mat-card>
+  <mat-card-content>
+    <mat-toolbar color="primary"> Cadastrar Cliente </mat-toolbar>
+
+    <form [formGroup]="form" class="min-width">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome" #nome />
+        <mat-hint align="end">{{ nome.value.length || 0 }}/100</mat-hint>
+        <mat-error *ngIf="form.get('nome')?.invalid">{{
+          getErrorMessage("nome")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>CPF</mat-label>
+        <input matInput formControlName="cpf" mask="000.000.000-00" />
+        <mat-error *ngIf="form.get('cpf')?.invalid">{{
+          getErrorMessage("cpf")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>RG</mat-label>
+        <input matInput formControlName="rg" #rg />
+        <mat-hint align="end">{{ rg.value.length || 0 }}/25</mat-hint>
+        <mat-error *ngIf="form.get('rg')?.invalid">{{
+          getErrorMessage("rg")
+        }}</mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSubmit()">Salvar</button>
+    <button mat-raised-button color="accent" (click)="onCancel()">Cancelar</button>
+
+    <div *ngIf="form.invalid" style="color: red">Preencha todos os campos</div>
+  </mat-card-actions>
+</mat-card>

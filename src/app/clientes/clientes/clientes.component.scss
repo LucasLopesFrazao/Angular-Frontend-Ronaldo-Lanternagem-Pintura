@@ -1,0 +1,31 @@
+table {
+  width: 100%;
+}
+
+mat-card{
+  max-width: 80%;
+  margin: 2em auto;
+}
+
+.column-flex{
+  display: flex;
+  flex-direction: column;
+  min-width: 300px
+}
+
+mat-table {
+  overflow: auto;
+  max-height: 600px;
+}
+
+.action-column{
+  flex: 0 0 150px;
+}
+
+.loading-spinner{
+  padding: 25px;
+  background-color: rgb(0,0,0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

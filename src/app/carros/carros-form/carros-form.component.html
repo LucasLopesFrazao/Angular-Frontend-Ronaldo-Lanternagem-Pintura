@@ -1,0 +1,80 @@
+<app-navbar></app-navbar>
+<mat-card>
+  <mat-card-content>
+    <mat-toolbar color="primary"> Cadastrar carro </mat-toolbar>
+
+    <form [formGroup]="form" class="min-width">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Marca</mat-label>
+        <input matInput formControlName="marca" #marca />
+        <mat-hint align="end">{{ marca.value.length || 0 }}/100</mat-hint>
+        <mat-error *ngIf="form.get('marca')?.invalid">{{
+          getErrorMessage("marca")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Modelo</mat-label>
+        <input matInput formControlName="modelo" #modelo />
+        <mat-hint align="end">{{ modelo.value.length || 0 }}/100</mat-hint>
+        <mat-error *ngIf="form.get('modelo')?.invalid">{{
+          getErrorMessage("modelo")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Chassi</mat-label>
+        <input matInput formControlName="chassi" mask="AAA AAAAAA AA AAAAAA" #chassi />
+        <mat-hint align="end">{{ chassi.value.length || 0 }}/100</mat-hint>
+        <mat-error *ngIf="form.get('chassi')?.invalid">{{
+          getErrorMessage("chassi")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Ano</mat-label>
+        <input
+          matInput
+          formControlName="ano"
+          [clearIfNotMatch]="true"
+          mask="0000"
+          #ano
+        />
+        <mat-hint align="end">{{ ano.value.length || 0 }}/4</mat-hint>
+        <mat-error *ngIf="form.get('ano')?.invalid">{{
+          getErrorMessage("ano")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Cor</mat-label>
+        <input matInput formControlName="cor" #cor />
+        <mat-hint align="end">{{ cor.value.length || 0 }}/25</mat-hint>
+        <mat-error *ngIf="form.get('cor')?.invalid">{{
+          getErrorMessage("cor")
+        }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Placa</mat-label>
+        <input
+          matInput
+          formControlName="placa"
+          [clearIfNotMatch]="true"
+          mask="SSS-0A00"
+          #placa
+        />
+        <mat-hint align="end">{{ placa.value.length || 0 }}/8</mat-hint>
+        <mat-error *ngIf="form.get('placa')?.invalid">{{
+          getErrorMessage("placa")
+        }}</mat-error>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSubmit()">Salvar</button>
+    <button mat-raised-button color="accent" (click)="onCancel()">Cancelar</button>
+
+    <div *ngIf="form.invalid" style="color: red">Preencha todos os campos</div>
+  </mat-card-actions>
+</mat-card>
